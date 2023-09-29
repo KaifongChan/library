@@ -72,4 +72,27 @@ body {
 
 .book-card {
     background-color: yellow;
+    border-radius: 5px;
+}
+
+#show-content {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+#show-book {
+    width:80%;
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+#delete-book {
+    width:20%;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
