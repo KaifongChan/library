@@ -69,18 +69,20 @@ function validateSubmission(book, author) {
 function addBookToLibrary(title, author, status) {
     const newBook = new Book(title, author, status);
     myLibrary.push(newBook);
-    let div = document.createElement("div");
-    div.classList.add("book-card");
-    div.classList.add(`${title}`)
-    div.textContent = `${myLibrary.length}. The book is ${title} written by ${author}. It ${(status === "read" ? `has been read.` : `has not been read.`)}`
-    container.appendChild(div);
+    let containerDiv = document.createElement("div");
+    let cardDiv = document.createElement("div");
+    cardDiv.classList.add("book-card");
+    cardDiv.classList.add(`${title}`)
+    cardDiv.textContent = `${myLibrary.length}. The book is ${title} written by ${author}. It ${(status === "read" ? `has been read.` : `has not been read.`)}`
+    containerDiv.appendChild(cardDiv);
     const newBtn = document.createElement("button");
     newBtn.value = `${title}`
     // console.log("HELL")
     newBtn.addEventListener('click', function (e) {
         removeBook(myLibrary, newBtn.value);
     })
-    container.appendChild(newBtn);
+    containerDiv.appendChild(newBtn);
+    container.appendChild(containerDiv);
 }
 
 function removeBook(source, interest) {
@@ -89,13 +91,15 @@ function removeBook(source, interest) {
             myLibrary.splice(x, 1);
         }
     }
-    let findDiv = document.getElementById("show-content").children;
-    for (let x = 0; x < findDiv.length; x ++ ){
-        if (findDiv[x].classList.contains(interest)) {
-            findDiv[x].remove();
+    let findDiv = container.children;
+    console.log(findDiv);
+    let findDivTwice = findDiv.children;
+    for (let x = 0; x < findDivTwice.length; x++) {
+        if (findDivTwice[x].classList.contains(interest)) {
+            findDivTwice[x].remove();
         }
-        if (findDiv[x].value === interest) {
-            findDiv[x].remove();
+        if (findDivTwice[x].value === interest) {
+            findDivTwice.remove();
         }
     }
 }
