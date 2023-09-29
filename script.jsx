@@ -71,6 +71,7 @@ function addBookToLibrary(title, author, status) {
     myLibrary.push(newBook);
     let div = document.createElement("div");
     div.classList.add("book-card");
+    div.classList.add(`${title}`)
     div.textContent = `${myLibrary.length}. The book is ${title} written by ${author}. It ${(status === "read" ? `has been read.` : `has not been read.`)}`
     container.appendChild(div);
     const newBtn = document.createElement("button");
@@ -79,15 +80,36 @@ function addBookToLibrary(title, author, status) {
     newBtn.addEventListener('click', function (e) {
         removeBook(myLibrary, newBtn.value);
     })
+    container.appendChild(newBtn);
 }
 
 function removeBook(source, interest) {
     for (let x = 0; x < source.length; x++) {
-        if (source[i].title === interest) {
-            myLibrary[i].remove();
+        if (source[x].title === interest) {
+            myLibrary.splice(x, 1);
+        }
+    }
+    let findDiv = document.getElementById("show-content").children;
+    for (let x = 0; x < findDiv.length; x ++ ){
+        if (findDiv[x].classList.contains(interest)) {
+            findDiv[x].remove();
+        }
+        if (findDiv[x].value === interest) {
+            findDiv[x].remove();
         }
     }
 }
+
+
+// function removeBook(source, interest) {
+//     for (let x = 0; x < source.length; x++) {
+//         if (source[x].title === interest) {
+//             myLibrary[x].remove();
+//         }
+//     }
+// }
+
+// document.getele
 
 
 function reset() {
